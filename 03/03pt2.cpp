@@ -11,13 +11,14 @@ const int SIZE = 12;
 
 int to_decimal(string input);
 string invert(string input);
+string recurse(vector<string> check, bool oxy, int index);
+
 
 int main()
 {
     string input = "";
     int sum[SIZE];
     vector<string> contain;
-    int count = 0;
     ifstream infile("input_03.txt");
     
     // oxygen gen rating
@@ -31,11 +32,9 @@ int main()
             int num = achar - '0';
             sum[i] += num; 
         }
-        count++;
     }
     infile.close();
 
-    count = 0;
     string toparse = "            ";
     for(int i = 0; i < SIZE; i++)
     {
@@ -47,12 +46,17 @@ int main()
     
     string gamma = toparse;
     string epsilon = invert(toparse);
+    string oxykey = recurse(contain, true, 0);
+    string co2key = recurse(contain, false, 0);
+    int oxydec = to_decimal(oxykey);
+    int co2dec = to_decimal(co2key);
     
     cout << "Gamma: " << toparse << " -> " << to_decimal(toparse) << endl;
     cout << "Epsilon: " << invert(toparse) << " -> " << to_decimal(invert(toparse)) << endl;
     //cout << "Mult: " << gamma * epsilon << endl;
-    cout << "Count: " << contain.size() << endl;
-    
+    cout << "Oxygen: " << oxykey << " -> " << oxydec << endl;
+    cout << "CO2: " << co2key << " -> " << co2dec << endl;
+    //cout << "Life Support Rating: " << oxydec * co2dec << endl; 
 
     return 0;
 }
@@ -89,4 +93,51 @@ int to_decimal(string input)
     }
     return ans;
 }
+
+string recurse(vector<string> check, bool oxy, int index)
+{
+    int size = check.size();
+    if(size <= 1)
+        return check.at(0);
+
+    int sum = 0;
+    char sign;
+    for(int i = 0; i < size; i++)
+    {
+        char achar = check[i][index];
+            int num = achar - '0';
+            sum += num; 
+    }
+    if(oxy)
+    {
+        if(sum > (size/2))
+            sign = '1';
+        else if(sum == (size/2))
+            sign = '1';
+        else
+            sign = '0';
+    }
+    else
+    {
+        if(sum < (size/2))
+            sign = '1';
+        else if(sum == (size/2))
+            sign = '0';
+        else
+            sign = '0';
+    }
+    vector<string> results;
+    for(int i = 0; i < size; i++)
+    {
+        if(check[i][index] == sign)
+        {
+            results.push_back(check[i]);
+            //cout << check[i][index] << endl;
+        }
+    }
+    check.clear();
+    return recurse(results, oxy, ++index);
+}
+
+
 
