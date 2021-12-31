@@ -56,7 +56,7 @@ int main()
     //cout << "Mult: " << gamma * epsilon << endl;
     cout << "Oxygen: " << oxykey << " -> " << oxydec << endl;
     cout << "CO2: " << co2key << " -> " << co2dec << endl;
-    //cout << "Life Support Rating: " << oxydec * co2dec << endl; 
+    cout << "Life Support Rating: " << oxydec * co2dec << endl; 
 
     return 0;
 }
@@ -100,28 +100,32 @@ string recurse(vector<string> check, bool oxy, int index)
     if(size <= 1)
         return check.at(0);
 
-    int sum = 0;
+    int sum_zero = 0;
+    int sum_one = 0;
     char sign;
     for(int i = 0; i < size; i++)
     {
         char achar = check[i][index];
             int num = achar - '0';
-            sum += num; 
+            if(achar == '0')
+                sum_zero++;
+            else
+                sum_one++;
     }
     if(oxy)
     {
-        if(sum > (size/2))
+        if(sum_one > sum_zero)
             sign = '1';
-        else if(sum == (size/2))
+        else if(sum_one == sum_zero)
             sign = '1';
         else
             sign = '0';
     }
     else
     {
-        if(sum < (size/2))
+        if(sum_one < sum_zero)
             sign = '1';
-        else if(sum == (size/2))
+        else if(sum_one == sum_zero)
             sign = '0';
         else
             sign = '0';
