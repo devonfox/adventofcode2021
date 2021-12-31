@@ -38,14 +38,67 @@ game::game()
     }
 }
 
-void game::run()
+void game::mark(int marked)
 {
+    for(int x = 0; x < data.size(); x++)
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < 5; j++)
+            {
+                if(data[x].player[i][j].value == marked)
+                    data[x].player[i][j].marked == true;
+            }
+        }
+    }
+}
+
+int game::run()
+{
+    int score = 0;
+    int called = 0;
+    if(data.size() == 0 || input.size() == 0)
+        return 0;
+    
+    for(int y = 0; y < input.size(); y++)
+    {
+        mark(input[y]);
+        if(victory_check(score, input[y]))
+            break;
+    }
+    return score * called;
 
 }
 
-bool game::victory_check()
+bool game::victory_check(int &score, int &called)
 {
+    bool bingo = false;
 
+    //horizontal check
+    for(int x = 0; x < data.size(); x++)
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < 5; j++)
+            {
+
+            }
+        }
+    }
+
+    //vertical check
+    for(int x = 0; x < data.size(); x++)
+    {
+        for(int i = 0; i < 5; i++)
+        {
+            for(int j = 0; j < 5; j++)
+            {
+
+            }
+        }
+    }
+
+    return bingo;
 }
 
 void game::test_input()

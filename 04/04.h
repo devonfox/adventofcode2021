@@ -1,10 +1,6 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <fstream>
-#include <list>
-#include <cctype>
-#include <iomanip>
 
 using namespace std;
 
@@ -23,13 +19,14 @@ class game
 {
     public:
         game();
-        void run();
+        int run();
         void test_input();
         void display_boards();
 
 
     private: 
-        bool victory_check();
+        void mark(int marked);
+        bool victory_check(int &score, int &called);
         vector<board> data;
         vector<int> input;
 };
