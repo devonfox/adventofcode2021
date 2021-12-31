@@ -63,35 +63,42 @@ int game::run()
     for(int y = 0; y < input.size(); y++)
     {
         mark(input[y]);
-        called = input[y];
-        if(victory_check(score, input[y]))    
-            break;
+        if(victory_check(score))
+        {
+            called = input[y];
+        }
     }
+    //victory_check(score, called);
     return score * called;
 
 }
 
-bool game::victory_check(int &score, int &called)
+bool game::victory_check(int &score)
 {
     bool bingo = false;
 
+    
     //horizontal check
     for(int x = 0; x < data.size(); x++)
-    {
-        for(int i = 0; i < 5; i++)
+    {  
+        if(!data[x].won)
         {
-            if(
-                data[x].player[i][0].marked &&
-                data[x].player[i][1].marked &&
-                data[x].player[i][2].marked &&
-                data[x].player[i][3].marked &&
-                data[x].player[i][4].marked
-            )
+            for(int i = 0; i < 5; i++)
             {
-                bingo = true;
-                cout << "Horiz Check" << endl;
-                score = find_score(x);
-                break;
+                if(
+                    data[x].player[i][0].marked &&
+                    data[x].player[i][1].marked &&
+                    data[x].player[i][2].marked &&
+                    data[x].player[i][3].marked &&
+                    data[x].player[i][4].marked
+                )
+                {
+                    bingo = true;
+                    cout << "Horiz Check" << endl;
+                    data[x].won = true;
+                    score = find_score(x);
+                    break;
+                }
             }
         }
     }
@@ -101,26 +108,42 @@ bool game::victory_check(int &score, int &called)
     
     for(int x = 0; x < data.size(); x++)
     {            
-        for(int j = 0; j < 5; j++)
+        if(!data[x].won)
         {
-            if(
-                data[x].player[0][j].marked &&
-                data[x].player[1][j].marked &&
-                data[x].player[2][j].marked &&
-                data[x].player[3][j].marked &&
-                data[x].player[4][j].marked
-            )
+            for(int j = 0; j < 5; j++)
             {
-                bingo = true;
-                cout << "Vert check" << endl;
-                score = find_score(x);
-                break;
+                if(
+                    data[x].player[0][j].marked &&
+                    data[x].player[1][j].marked &&
+                    data[x].player[2][j].marked &&
+                    data[x].player[3][j].marked &&
+                    data[x].player[4][j].marked
+                )
+                {
+                    bingo = true;
+                    cout << "Vert check" << endl;
+                    data[x].won = true;
+                    score = find_score(x);
+                    break;
+                }
             }
         }
     }
     
 
     return bingo;
+}
+
+int game::last_board()
+{
+    int index = 0;
+
+    for(int x = 0; x < data.size(); x++)
+    {
+
+    }    
+
+    return index;
 }
 
 void game::test_input()

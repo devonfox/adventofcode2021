@@ -13,6 +13,7 @@ struct spot
 struct board 
 {
         spot player[5][5];
+        bool won = false;
 };
 
 class game
@@ -27,7 +28,8 @@ class game
     private: 
         int find_score(int index);
         void mark(int marked);
-        bool victory_check(int &score, int &called);
+        bool victory_check(int &score);
+        int last_board();
         vector<board> data;
         vector<int> input;
 };
