@@ -25,6 +25,7 @@ class game
 
 
     private: 
+        int find_score(int index);
         void mark(int marked);
         bool victory_check(int &score, int &called);
         vector<board> data;

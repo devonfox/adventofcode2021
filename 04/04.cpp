@@ -7,7 +7,7 @@ int main()
     //bingo.display_boards();
     int answer = bingo.run();
 
-    cout << "Final score :" << answer << endl;
+    cout << "Final score: " << answer << endl;
 
     return 0;
 }
