@@ -1,75 +1,5 @@
 #include "05.h"
 
-point::point(): x(0), y(0)
-{
-
-}
-
-point::point(int ex, int wai)
-{
-    x = ex;
-    y = wai;
-}
-
-point::point(const point &source)
-{
-    x = source.x;
-    y = source.y;
-}
-
-void point::display()
-{
-    cout << "(" << x << "," << y << ")";
-}
-
-void point::set_x(int newx)
-{
-    x = newx;
-}
-
-int point::get_x()
-{
-    return x;
-}
-
-void point::set_y(int newy)
-{
-    y = newy;
-}
-
-int point::get_y()
-{
-    return y;
-}
-
-line::line() {}
-
-line::line(const line& source)
-{
-    first = source.first;
-    second = source.second;
-}
-
-line::line(point firstone, point secondone)
-{
-    first.set_x(firstone.get_x());
-    first.set_y(firstone.get_y());
-    second.set_x(secondone.get_x());
-    second.set_y(secondone.get_y());
-}
-        
-bool find(int &vert, int &horiz)
-{
-
-}
-
-void line::display()
-{
-    first.display();
-    cout << " -> ";
-    second.display();
-}
-
 graph::graph()
 {
     for(int i = 0; i < size; i++)
@@ -81,11 +11,9 @@ graph::graph()
     }
 }
 
-
-
 void graph::lineitup()
 {
-    ifstream in("input_05_sample.txt");
+    ifstream in("input_05.txt");
     int x = 0;
     int y = 0;
     string capture;
@@ -99,7 +27,6 @@ void graph::lineitup()
 
         int x1 = x;
         int y1 = y;
-        //point one(x, y);
 
         in >> x;
         in.ignore();
@@ -108,35 +35,73 @@ void graph::lineitup()
         int x2 = x;
         int y2 = y;
 
-        //point two(x,y);
+        cout << "(" << x1 << "," << y1 << ")";
+        cout << " -> ";
+        cout << "(" << x2 << "," << y2 << ")";
+        cout << endl << endl;
 
         if(x1 == x2)
         {
-            if(y1 == y2)
+            if(y1 < y2)
             {
-                matrix[x][y]++;
+                for(int i = y1; i <= y2; i++)
+                {
+                    matrix[x1][i]++;
+                }
             }
             else
             {
-                for(int i = y1; i )
+                for(int i = y2; i <= y1; i++)
+                {
+                    matrix[x1][i]++;
+                }
             }
         }
-
-        //line newline(one, two);
-
-        //newline.display();
-        //cout << endl;
-
-
-
-        for(int i = 0; i < size; i++)
+        else if(y1 == y2)
         {
-            for(int j = 0; i < size; j++)
+            if(x1 < x2)
             {
-
+                for(int i = x1; i <= x2; i++)
+                {
+                    matrix[i][y1]++;
+                }
+            }
+            else
+            {
+                for(int i = x2; i <= x1; i++)
+                {
+                    matrix[i][y1]++;
+                }
             }
         }
+    }
+}
 
+void graph::print()
+{
+    for(int i = 0; i < size; i++)
+    {
+        for(int j = 0; j < size; j++)
+        {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int graph::countitup()
+{
+    int count = 0;
+    for(int i = 0; i < size; i++)
+    {
+        for(int j = 0; j < size; j++)
+        {
+            if(matrix[i][j] > 1)
+            {
+                count++;
+            }
+        }
     }
 
+    return count;
 }
