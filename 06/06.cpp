@@ -12,13 +12,14 @@ school::school()
         lanternfish newfish(input);
         seafloor.push_back(newfish);
     }
+    //amount = seafloor.size();
 }
 
 int school::run()
 {
     int day = 0;
 
-    while(day <= 18)
+    while(day <= 80)
     {
         int size = seafloor.size();
         if(day == 0)
@@ -39,18 +40,26 @@ int school::run()
         }
         for(int i = 0; i < size; i++)
         {
-            print(i);
-            if(seafloor[i].timer == 0)
+            if(day != 0)
             {
-                seafloor[i].timer = 6;
-                lanternfish newfish(8);
-                seafloor.push_back(newfish);
-                size++;
+                
+                if(seafloor[i].timer == 0)
+                {
+                    seafloor[i].timer = 6;
+
+                    // need to change the ordering here
+                    lanternfish newfish(9); 
+                    //this is so dumb but it works
+                    seafloor.push_back(newfish);
+                    //amount += 1;
+                    size++;
+                }
+                else
+                {
+                    seafloor[i].timer -= 1;
+                }
             }
-            else
-            {
-                seafloor[i].timer -= 1;
-            }
+            //print(i);  //comment out for pt2
         }
         cout << endl;
         day++;
@@ -68,3 +77,9 @@ void school::print(int index)
         cout << seafloor[index].timer << ",";
 }
 
+/*
+long long school::get_amount()
+{
+    return amount;
+}
+*/
