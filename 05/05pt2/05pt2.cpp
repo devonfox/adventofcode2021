@@ -35,13 +35,13 @@ void graph::lineitup()
         int x2 = x;
         int y2 = y;
         
-        /*
+        /* 
         cout << "(" << x1 << "," << y1 << ")";
         cout << " -> ";
         cout << "(" << x2 << "," << y2 << ")";
-        cout << endl << endl;
+        cout << endl;
         */
-
+        
         if(x1 == x2)
         {
             if(y1 < y2)
@@ -76,51 +76,57 @@ void graph::lineitup()
                 }
             }
         }
-
+        
+         
         int diffx = abs(x1 - x2);
         int diffy = abs(y1 - y2);
-        //cout << diffx << " :Diffx " << endl;
-        //cout << diffy << " :Diffy " << endl;
+     
         if(diffx == diffy)
         {
-            int xlow = 0;
-            int xhigh = 0;
-            int ylow = 0;
-            int yhigh = 0;
+             
+
             if(x1 < x2)
             {
-                xlow = x1;
-                xhigh = x2;
                 if(y1 < y2)
                 {
-                    ylow = y1;
-                    yhigh = y2;
+                    
+                    for(int i = x1; i <= x2; i++)
+                    {
+                        matrix[i][y1]++;
+                        y1++;
+                    }
                 }
                 else
                 {
-                    ylow = y2;
-                    yhigh = y1;
+                    cout << "(" << x1 << "," << y1 << ")";
+                    cout << " -> ";
+                    cout << "(" << x2 << "," << y2 << ")";
+                    cout << endl;
+                    for(int i = x1; i <= x2; i++)
+                    {
+                        matrix[i][y2]++;
+                        y2--;
+                    }
                 }
             }
             else
             {
-                xlow = x2;
-                xhigh = x1;
-                if(y1 < y2)
+                 if(y1 < y2)
                 {
-                    ylow = y1;
-                    yhigh = y2;
+                    
+                    for(int i = x2; i <= x1; i++)
+                    {
+                        matrix[i][y2--]++;
+                    }
                 }
                 else
                 {
-                    ylow = y2;
-                    yhigh = y1;
+                    
+                    for(int i = x2; i <= x1; i++)
+                    {
+                        matrix[i][y1--]++;
+                    }
                 }
-            }
-            
-            for(int i = xlow; i <= xhigh; i++)
-            {
-                    matrix[i][ylow++]++;
             }
             
         }
@@ -135,7 +141,10 @@ void graph::print()
     {
         for(int j = 0; j < size; j++)
         {
-            cout << matrix[i][j] << " ";
+            if(!matrix[j][i])
+                cout << ". ";
+            else
+                cout << matrix[j][i] << " ";
         }
         cout << endl;
     }
@@ -148,7 +157,7 @@ int graph::countitup()
     {
         for(int j = 0; j < size; j++)
         {
-            if(matrix[i][j] > 1)
+            if(matrix[j][i] > 1)
             {
                 count++;
             }
