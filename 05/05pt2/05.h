@@ -18,7 +18,7 @@ class graph
         int countitup(); //overlapping count
 
     private:
-        int size = 10; // example size is 10
-        int matrix[10][10];  //int matrix[10][10] for example
+        int size = 1000; // example size is 10
+        int matrix[1000][1000];  //int matrix[10][10] for example
         
 };

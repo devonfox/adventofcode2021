@@ -13,7 +13,7 @@ graph::graph()
 
 void graph::lineitup()
 {
-    ifstream in("input_05_sample.txt");
+    ifstream in("input_05.txt");
     int x = 0;
     int y = 0;
     string capture;
@@ -98,14 +98,11 @@ void graph::lineitup()
                 }
                 else
                 {
-                    cout << "(" << x1 << "," << y1 << ")";
-                    cout << " -> ";
-                    cout << "(" << x2 << "," << y2 << ")";
-                    cout << endl;
+                    
                     for(int i = x1; i <= x2; i++)
                     {
-                        matrix[i][y2]++;
-                        y2--;
+                        matrix[i][y1]++;
+                        y1--;
                     }
                 }
             }
@@ -121,10 +118,13 @@ void graph::lineitup()
                 }
                 else
                 {
-                    
+                    cout << "(" << x1 << "," << y1 << ")";
+                    cout << " -> ";
+                    cout << "(" << x2 << "," << y2 << ")";
+                    cout << endl;
                     for(int i = x2; i <= x1; i++)
                     {
-                        matrix[i][y1--]++;
+                        matrix[i][y2++]++;
                     }
                 }
             }
