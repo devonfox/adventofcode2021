@@ -13,7 +13,7 @@ graph::graph()
 
 void graph::lineitup()
 {
-    ifstream in("input_05.txt");
+    ifstream in("input_05_sample.txt");
     int x = 0;
     int y = 0;
     string capture;
@@ -34,11 +34,13 @@ void graph::lineitup()
 
         int x2 = x;
         int y2 = y;
-
+        
+        /*
         cout << "(" << x1 << "," << y1 << ")";
         cout << " -> ";
         cout << "(" << x2 << "," << y2 << ")";
         cout << endl << endl;
+        */
 
         if(x1 == x2)
         {
@@ -74,6 +76,56 @@ void graph::lineitup()
                 }
             }
         }
+
+        int diffx = abs(x1 - x2);
+        int diffy = abs(y1 - y2);
+        //cout << diffx << " :Diffx " << endl;
+        //cout << diffy << " :Diffy " << endl;
+        if(diffx == diffy)
+        {
+            int xlow = 0;
+            int xhigh = 0;
+            int ylow = 0;
+            int yhigh = 0;
+            if(x1 < x2)
+            {
+                xlow = x1;
+                xhigh = x2;
+                if(y1 < y2)
+                {
+                    ylow = y1;
+                    yhigh = y2;
+                }
+                else
+                {
+                    ylow = y2;
+                    yhigh = y1;
+                }
+            }
+            else
+            {
+                xlow = x2;
+                xhigh = x1;
+                if(y1 < y2)
+                {
+                    ylow = y1;
+                    yhigh = y2;
+                }
+                else
+                {
+                    ylow = y2;
+                    yhigh = y1;
+                }
+            }
+            
+            for(int i = xlow; i <= xhigh; i++)
+            {
+                    matrix[i][ylow++]++;
+            }
+            
+        }
+    
+
     }
 }
 
