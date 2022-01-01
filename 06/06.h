@@ -18,7 +18,7 @@ class school
     public:
         school();
         int run();
-        void print();
+        void print(int index);
     
     private:
         vector<lanternfish> seafloor;
