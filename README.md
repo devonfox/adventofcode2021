@@ -2,8 +2,8 @@
 
 Working through the 2021 [Advent Of Code](https://adventofcode.com/) problems.
 
-I'm choosing C++ as I'm most comfortable within this language.
+C++ solutions.
 
-**10** Stars Attained (as of 12/31/2021)
+**13** Stars Attained (as of 1/1/2022)
 
-Current puzzle: **Day 6, Part 1**
+Current puzzle: **Day 7, Part 2**
