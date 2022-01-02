@@ -1,5 +1,7 @@
 #include "07.h"
 
+// Sample answer: 168
+
 swarm::swarm()
 {
     ifstream in("input_07.txt");
@@ -28,8 +30,7 @@ swarm::swarm()
         //cout << "Max: " << maximum << endl;
         //cout << "Min: " << minimum << endl;
         //cout << endl;
-    }
-    
+    } 
 }
 
 int swarm::run()
@@ -42,12 +43,24 @@ int swarm::run()
 
     for(int x = 0; x < group.size(); x++)
     {
-        int currentfuel = 0;
+        int sumfuel = 0;
+        int distance = 0;
         for(int y = 0; y < group.size(); y++)
         { 
-            currentfuel += abs(group[y].position-x);
+            int currfuel = 0;
+            distance = abs(group[y].position-x);
+            if(distance)
+            {
+                int increase = 1;
+                for(int z = 1; z <= distance; z++)
+                {
+                    currfuel += increase;
+                    increase++;
+                }
+            }
+            sumfuel += currfuel;
         }
-        minfuel = min(minfuel, currentfuel);
+        minfuel = min(minfuel, sumfuel);
     }
 
 
