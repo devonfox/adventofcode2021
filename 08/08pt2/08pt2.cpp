@@ -20,20 +20,34 @@ display::display()
             newvector.push_back(input);
         }
         output.push_back(newvector);
-
     }
-
-}
-
-int display::run()
-{
-
 }
 
 int display::decoder()
 {
-    
+    int sum = 0;
 
+    for(int x = 0; x < output.size(); x++)
+    {
+        sum += decoder(x);
+    }
+    return sum;
+}
+
+int display::decoder(int index)
+{
+    int count = 0;
+    for(int x = 0; x < 10; x++)
+    {
+        count++;
+        //cout << output[index][x] << " ";
+    }
+
+    for(int x = 10; x < 14; x++)
+    {
+
+    }
+    return count;
 }
 
 void display::print()

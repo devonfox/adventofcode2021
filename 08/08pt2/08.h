@@ -4,16 +4,22 @@
 
 using namespace std;
 
+struct key
+{
+    string key;
+    int value;
+};
+
 class display
 {
     public:
         display();
-        int run();
         int decoder();
+        int decoder(int index);
         void print();
 
     private:
         vector<vector<string>> output;
-        // index 0 is for parsing code
-        // index 1 is for the final decoded output
+        // external vector is for each line
+        // internal vector is for
 };
